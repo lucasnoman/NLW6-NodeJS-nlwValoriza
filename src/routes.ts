@@ -1,12 +1,14 @@
 import { Router } from 'express';
 import { CreateUserController } from './controllers/CreateUserController';
 import { CreateTagController } from './controllers/CreateTagController';
+import { ensureAdmin } from './middleware/ensureAdmin';
 
 export const router = Router();
 
 const createUserController = new CreateUserController();
 const createTagController = new CreateTagController();
 
-// Como o controller está recebendo o request e response, não preciso declará-los novamente na rota
+// o middleware ensureAdmin pode ser usado antes das rotas ou dentro de cada uma delas
+// caso seja necessário funcionar em apenas uma rota específica
 router.post('/users', createUserController.handle);
-router.post('/tag', createTagController.handle);
+router.post('/tags', ensureAdmin, createTagController.handle);

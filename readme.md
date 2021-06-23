@@ -50,3 +50,11 @@
 
 - o que esse controller faz?
 - o que tem que ter nesse controller?
+
+## Controle de admin
+
+[43:30]
+
+- o que é esse controle?
+- o que o middleware precisa como importação?
+- como é feito o controle dentro da função desse middleware?
