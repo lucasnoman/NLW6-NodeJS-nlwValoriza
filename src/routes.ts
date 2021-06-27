@@ -5,6 +5,8 @@ import { ensureAdmin } from './middleware/ensureAdmin';
 import { AuthenticateUserController } from './controllers/AuthenticateUserController';
 import { CreateComplimentController } from './controllers/CreateComplimentController';
 import { ensureAuthenticated } from './middleware/ensureAuthenticated';
+import { ListUserSendComplimentsController } from './controllers/ListUserSendComplimentsController';
+import { ListUserReceiveComplimentsController } from './controllers/ListUserReceiveComplimentsController';
 
 export const router = Router();
 
@@ -12,6 +14,10 @@ const createUserController = new CreateUserController();
 const createTagController = new CreateTagController();
 const authenticateUserController = new AuthenticateUserController();
 const createComplimentController = new CreateComplimentController();
+const listUserSendComplimentsController =
+  new ListUserSendComplimentsController();
+const listUserReceiveComplimentsController =
+  new ListUserReceiveComplimentsController();
 
 // o middleware ensureAdmin pode ser usado antes das rotas ou dentro de cada uma delas
 // caso seja necessário funcionar em apenas uma rota específica
@@ -27,4 +33,14 @@ router.post(
   '/compliments',
   ensureAuthenticated,
   createComplimentController.handle
+);
+router.get(
+  '/users/compliments/send',
+  ensureAuthenticated,
+  listUserSendComplimentsController.handle
+);
+router.get(
+  '/users/compliments/receive',
+  ensureAuthenticated,
+  listUserReceiveComplimentsController.handle
 );
