@@ -5,7 +5,10 @@ export function ensureAdmin(
   response: Response,
   next: NextFunction
 ) {
+  const { user_id } = request;
+
   const admin = true;
+
   if (admin) {
     return next();
   }

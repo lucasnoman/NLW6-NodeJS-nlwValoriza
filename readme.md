@@ -11,4 +11,4 @@
 
 ## Service
 
-- Entender como a Rocket usa o service
+- Entender como a Rocketseat usa o service
