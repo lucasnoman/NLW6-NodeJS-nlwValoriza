@@ -8,6 +8,7 @@ import { ensureAuthenticated } from './middleware/ensureAuthenticated';
 import { ListUserSendComplimentsController } from './controllers/ListUserSendComplimentsController';
 import { ListUserReceiveComplimentsController } from './controllers/ListUserReceiveComplimentsController';
 import { ListTagsController } from './controllers/ListTagsController';
+import { ListUsersController } from './controllers/ListUsersController';
 
 export const router = Router();
 
@@ -20,6 +21,7 @@ const listUserSendComplimentsController =
 const listUserReceiveComplimentsController =
   new ListUserReceiveComplimentsController();
 const listTagsController = new ListTagsController();
+const listUsersController = new ListUsersController();
 
 // o middleware ensureAdmin pode ser usado antes das rotas ou dentro de cada uma delas
 // caso seja necessário funcionar em apenas uma rota específica
@@ -47,3 +49,9 @@ router.get(
   listUserReceiveComplimentsController.handle
 );
 router.get('/tags', ensureAuthenticated, listTagsController.handle);
+router.get(
+  '/users',
+  ensureAuthenticated,
+  ensureAdmin,
+  listUsersController.handle
+);
